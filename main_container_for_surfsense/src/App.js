@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import './App.css';
 import { ReactComponent as WaveIcon } from './assets/icons/wave.svg';
@@ -11,7 +11,21 @@ import SessionDetailPage from './pages/SessionDetailPage';
 import StatsPage from './pages/StatsPage';
 import { SurfProvider } from './data/surfContext';
 
+// Import background utilities
+import { applyOceanicBackgrounds, applyNeonEffects } from './utils/backgroundLoader';
+
 function App() {
+  // Apply background effects after component mounts
+  useEffect(() => {
+    // Small delay to ensure DOM is fully rendered
+    const timer = setTimeout(() => {
+      applyOceanicBackgrounds();
+      applyNeonEffects();
+    }, 100);
+    
+    return () => clearTimeout(timer);
+  }, []);
+  
   return (
     <SurfProvider>
       <Router>
