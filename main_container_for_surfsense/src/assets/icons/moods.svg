@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 24" width="120" height="24">
+  <!-- Poor Mood -->
+  <circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="1.5" />
+  <path d="M8 16c1.5-1 4.5-1 8 0" stroke="currentColor" stroke-width="1.5" fill="none" />
+  <circle cx="8" cy="9" r="1.5" fill="currentColor" />
+  <circle cx="16" cy="9" r="1.5" fill="currentColor" />
+  <path d="M5 5 C 6 3, 10 0, 19 5" stroke="currentColor" stroke-width="1" fill="none" />
+  
+  <!-- Fair Mood -->
+  <circle cx="36" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="1.5" />
+  <line x1="32" y1="16" x2="40" y2="16" stroke="currentColor" stroke-width="1.5" />
+  <circle cx="32" cy="9" r="1.5" fill="currentColor" />
+  <circle cx="40" cy="9" r="1.5" fill="currentColor" />
+  <path d="M29 5 C 30 3, 34 0, 43 5" stroke="currentColor" stroke-width="1" fill="none" />
+  
+  <!-- Good Mood -->
+  <circle cx="60" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="1.5" />
+  <path d="M56 14c1.5 2 4.5 2 8 0" stroke="currentColor" stroke-width="1.5" fill="none" />
+  <circle cx="56" cy="9" r="1.5" fill="currentColor" />
+  <circle cx="64" cy="9" r="1.5" fill="currentColor" />
+  <path d="M53 7 C 54 5, 58 2, 67 7" stroke="currentColor" stroke-width="1" fill="none" />
+  
+  <!-- Great Mood -->
+  <circle cx="84" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="1.5" />
+  <path d="M80 13c1.5 2 4.5 2 8 0" stroke="currentColor" stroke-width="1.5" fill="none" />
+  <circle cx="80" cy="9" r="1.5" fill="currentColor" />
+  <circle cx="88" cy="9" r="1.5" fill="currentColor" />
+  <path d="M78 4 C 81 1, 87 1, 90 4" stroke="currentColor" stroke-width="1.5" fill="none" />
+  
+  <!-- Epic Mood -->
+  <circle cx="108" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="1.5" />
+  <path d="M104 13c1.5 2 4.5 2 8 0" stroke="currentColor" stroke-width="1.5" fill="none" />
+  <circle cx="104" cy="9" r="1.5" fill="currentColor" />
+  <circle cx="112" cy="9" r="1.5" fill="currentColor" />
+  <path d="M103 6 C 104 3, 112 3, 113 6" stroke="currentColor" stroke-width="1.5" fill="none" />
+  <path d="M101 2 C 103 0, 113 0, 115 2" stroke="currentColor" stroke-width="1" fill="none" />
+</svg>
