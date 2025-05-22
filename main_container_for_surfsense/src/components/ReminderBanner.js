@@ -29,7 +29,7 @@ const ReminderBanner = () => {
         left: 0,
         right: 0,
         bottom: 0,
-        backgroundImage: 'url("./assets/images/wave-bg.svg")',
+        backgroundImage: 'url("../assets/images/wave-bg.svg")',
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         opacity: 0.1,
