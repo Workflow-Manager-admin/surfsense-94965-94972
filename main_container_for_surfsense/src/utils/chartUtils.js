@@ -133,9 +133,23 @@ export const formatMoodLabel = (value) => {
   }
 };
 
+// Enhanced text truncation that adjusts based on container size
+export const truncateText = (text, maxLength = 12, containerWidth) => {
+  if (!text) return '';
+  
+  // Adjust max length based on container size
+  if (containerWidth) {
+    if (containerWidth < 350) maxLength = 6;
+    else if (containerWidth < 500) maxLength = 8;
+    else if (containerWidth < 768) maxLength = 10;
+  }
+  
+  if (text.length <= maxLength) return text;
+  return `${text.substring(0, maxLength)}...`;
+};
+
 // Calculate dynamic font size based on available space and text length
 export const dynamicFontSize = (containerWidth, textLength) => {
-=======
   if (!containerWidth) containerWidth = window.innerWidth < 768 ? 300 : 500;
   
   if (containerWidth < 200) return FONT_SIZES.xsmall;
@@ -191,21 +205,6 @@ export const getTickInterval = (dataLength, containerWidth) => {
   if (dataLength > 12) return Math.ceil(dataLength / 6);
   
   return 0; // Show all ticks
-};
-
-// Enhanced text truncation that adjusts based on container size
-export const truncateText = (text, maxLength = 12, containerWidth) => {
-  if (!text) return '';
-  
-  // Adjust max length based on container size
-  if (containerWidth) {
-    if (containerWidth < 350) maxLength = 6;
-    else if (containerWidth < 500) maxLength = 8;
-    else if (containerWidth < 768) maxLength = 10;
-  }
-  
-  if (text.length <= maxLength) return text;
-  return `${text.substring(0, maxLength)}...`;
 };
 
 // Determines whether to show labels based on data density and container width
