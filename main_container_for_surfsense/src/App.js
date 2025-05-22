@@ -34,11 +34,11 @@ function App() {
               <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%', alignItems: 'center' }}>
                 <Link to="/" style={{ textDecoration: 'none' }}>
                   <div className="logo">
-                    <WaveIcon stroke="var(--neon-blue)" style={{ 
-                      width: '24px', 
-                      height: '24px',
+                    <span style={{ 
+                      fontSize: '24px',
+                      marginRight: '8px',
                       filter: 'drop-shadow(0 0 5px var(--neon-blue))'
-                    }} /> 
+                    }}>🌊</span> 
                     <span className="glow-text">SurfSync</span>
                   </div>
                 </Link>
