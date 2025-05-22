@@ -284,9 +284,12 @@ body::before {
 
 .form-label {
   display: block;
-  margin-bottom: 8px;
+  margin-bottom: 10px;
   font-weight: 500;
-  color: var(--dark-blue);
+  color: var(--text-color);
+  text-shadow: 0 0 5px rgba(0, 229, 255, 0.5);
+  font-size: 0.95rem;
+  letter-spacing: 0.5px;
 }
 
 .form-control {
