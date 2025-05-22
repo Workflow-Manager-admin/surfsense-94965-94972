@@ -20,20 +20,47 @@ export const CHART_COLORS = {
   }
 };
 
-// Font sizes for better readability
+// Font sizes with responsive multipliers for different viewport sizes
 export const FONT_SIZES = {
   xsmall: 10,
   small: 12,
   medium: 14,
   large: 16,
-  xlarge: 18
+  xlarge: 18,
+  
+  // Responsive size calculation helper
+  getResponsive: (baseSize, containerWidth) => {
+    if (!containerWidth) return baseSize;
+    
+    // Scale down font size for smaller containers
+    if (containerWidth < 300) return Math.max(8, baseSize * 0.75);
+    if (containerWidth < 500) return Math.max(9, baseSize * 0.85);
+    if (containerWidth < 768) return baseSize * 0.9;
+    
+    return baseSize;
+  }
 };
 
 // Chart margins to prevent text overlapping
 export const CHART_MARGINS = {
-  small: { top: 10, right: 10, bottom: 10, left: 10 },
-  medium: { top: 20, right: 30, bottom: 20, left: 20 },
-  large: { top: 30, right: 40, bottom: 30, left: 40 }
+  small: { top: 10, right: 15, bottom: 15, left: 15 },
+  medium: { top: 20, right: 35, bottom: 30, left: 30 },
+  large: { top: 30, right: 45, bottom: 40, left: 45 },
+  
+  // Get responsive margins based on container size and data complexity
+  getResponsive: (baseMargins, containerWidth, dataLength = 0) => {
+    const scaleFactor = containerWidth < 500 ? 0.8 : containerWidth < 768 ? 0.9 : 1;
+    
+    // Increase bottom margin for many data points on x-axis
+    const extraBottomMargin = dataLength > 6 ? 15 : dataLength > 3 ? 10 : 0;
+    
+    return {
+      top: baseMargins.top * scaleFactor,
+      right: baseMargins.right * scaleFactor,
+      bottom: (baseMargins.bottom * scaleFactor) + extraBottomMargin,
+      left: baseMargins.left * scaleFactor + (containerWidth < 400 ? 10 : 0)
+    };
+  }
 };
 
 // Tooltip styling for better visibility
