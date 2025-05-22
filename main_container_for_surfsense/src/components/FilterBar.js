@@ -18,11 +18,10 @@ const FilterBar = () => {
     }}>
       <div className="page-header">
         <h3 className="subtitle glow-text" style={{ display: 'flex', alignItems: 'center' }}>
-          <FilterIcon stroke="var(--neon-blue)" style={{ 
-            width: '18px', 
-            height: '18px',
+          <span style={{ 
+            fontSize: '18px',
             marginRight: '8px' 
-          }} />
+          }}>🔍</span>
           Filter Sessions
         </h3>
         <button 
