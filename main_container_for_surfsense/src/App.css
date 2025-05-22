@@ -1,21 +1,28 @@
 :root {
-  /* Ocean-themed color palette */
-  --primary-blue: #0277BD;
-  --light-blue: #58B0D8;
+  /* Futuristic ocean-themed color palette */
+  --primary-blue: #0288D1;
+  --light-blue: #29B6F6;
   --deep-blue: #01579B;
-  --teal: #00838F;
+  --teal: #00BCD4;
+  --neon-blue: #00E5FF;
+  --neon-teal: #1DE9B6;
   --aqua: #4DD0E1;
-  --sand: #F5F0E1;
+  --sand: #FFF8E1;
   --coral: #FF8A65;
   --white: #FFFFFF;
   --dark-blue: #023E58;
-  --text-color: #023E58;
-  --text-secondary: #6B818C;
-  --border-color: rgba(2, 126, 189, 0.15);
-  --card-background: #FFFFFF;
-  --background: #F5FBFF;
+  --text-color: #E1F5FE;
+  --text-secondary: #B3E5FC;
+  --border-color: rgba(0, 229, 255, 0.3);
+  --card-background: rgba(13, 71, 161, 0.6);
+  --card-overlay: rgba(1, 87, 155, 0.85);
+  --background: #0D47A1;
   --error: #FF5252;
-  --success: #4CAF50;
+  --success: #00E676;
+  --gradient-primary: linear-gradient(135deg, #0288D1, #00BCD4);
+  --gradient-accent: linear-gradient(135deg, #00E5FF, #1DE9B6);
+  --shadow-neon: 0 0 10px rgba(0, 229, 255, 0.5);
+  --shadow-card: 0 8px 16px rgba(0, 0, 0, 0.3);
 }
 
 body {
