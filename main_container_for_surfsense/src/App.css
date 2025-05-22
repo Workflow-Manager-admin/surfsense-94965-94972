@@ -496,10 +496,7 @@ body::before {
   left: 0;
   width: 100%;
   height: 100%;
-  background-image: url('./assets/images/surf-silhouette.svg');
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
+  background-color: rgba(2, 136, 209, 0.1);
   opacity: 0.2;
   z-index: -1;
 }
@@ -511,8 +508,7 @@ body::before {
   left: 0;
   width: 100%;
   height: 180px;
-  background-image: url('./assets/images/wave-bg.svg');
-  background-size: cover;
+  background: linear-gradient(to bottom, transparent, rgba(0, 229, 255, 0.1));
   z-index: 1;
 }
 
