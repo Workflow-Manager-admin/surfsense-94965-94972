@@ -23,7 +23,7 @@ const SessionCard = ({ session }) => {
       <div className="card-header flex justify-between">
         <div className="flex items-center">
           <div className="surf-icon">
-            <WaveIcon stroke="var(--neon-blue)" />
+            🌊
           </div>
           <h3 className="card-title glow-text">{session.spot || 'Unnamed Spot'}</h3>
         </div>
