@@ -1,0 +1,5 @@
+{
+  "task_description": "{'component_name': 'Main Container for SurfSense', 'description': 'Primary container for SurfSense implementation: A surf session tracking app that helps surfers log and analyze their surfing experiences, with detailed session tracking, mood logging, and performance insights.', 'framework': 'react', 'platform': 'web'}",
+  "tasks": {},
+  "next_task_id": 1
+}
