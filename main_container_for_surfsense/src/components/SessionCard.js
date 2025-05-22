@@ -9,22 +9,27 @@ const SessionCard = ({ session }) => {
   // Array of mood emojis from worst to best
   const moodEmojis = ['😞', '😐', '🙂', '😊', '🤩'];
   
+  // Get mood index safely
+  const moodIndex = session.mood && session.mood >= 1 && session.mood <= 5 
+    ? session.mood - 1 
+    : 2; // Default to middle mood if invalid
+  
   return (
     <div className="card">
       <div className="flex justify-between">
-        <h3 className="card-title">{session.spot}</h3>
-        <div className="mood-emoji" title={`Mood: ${session.mood}/5`}>
-          {moodEmojis[session.mood - 1]}
+        <h3 className="card-title">{session.spot || 'Unnamed Spot'}</h3>
+        <div className="mood-emoji" title={`Mood: ${session.mood || 3}/5`}>
+          {moodEmojis[moodIndex]}
         </div>
       </div>
       
       <div className="card-subtitle">
-        {format(parseISO(session.date), 'MMMM d, yyyy')} • {session.board}
+        {session.date ? format(parseISO(session.date), 'MMMM d, yyyy') : 'No date'} • {session.board || 'Unknown board'}
       </div>
       
       <div className="card-body">
         <div>
-          <strong>Waves: </strong>{session.waveCount}
+          <strong>Waves: </strong>{session.waveCount || 0}
         </div>
         {session.notes && (
           <div style={{ marginTop: '8px' }}>
@@ -35,9 +40,15 @@ const SessionCard = ({ session }) => {
       
       <div className="card-footer">
         <div>
-          <span className="tag">{session.conditions.swellHeight}ft</span>
-          <span className="tag">{session.conditions.wind}</span>
-          <span className="tag">{session.conditions.tide} Tide</span>
+          {session.conditions ? (
+            <>
+              <span className="tag">{session.conditions.swellHeight || 0}ft</span>
+              <span className="tag">{session.conditions.wind || 'Unknown'}</span>
+              <span className="tag">{session.conditions.tide || 'Unknown'} Tide</span>
+            </>
+          ) : (
+            <span className="tag">No conditions data</span>
+          )}
         </div>
         <Link to={`/session/${session.id}`}>
           <button className="btn btn-secondary">View Details</button>
