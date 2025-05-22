@@ -595,11 +595,11 @@ export const SurfProvider = ({ children }) => {
       }))
       .sort((a, b) => b.percentage - a.percentage);
       
-    // Calculate mood trend over time
-    const last10Sessions = [...sessions]
+    // Calculate mood trend over time - showing last 15 sessions for a more comprehensive trend
+    const last15Sessions = [...sessions]
       .sort((a, b) => new Date(a.date) - new Date(b.date))
-      .slice(-10);
-    const moodTrend = last10Sessions.map(session => ({
+      .slice(-15);
+    const moodTrend = last15Sessions.map(session => ({
       date: session.date,
       mood: session.mood
     }));

@@ -14,8 +14,8 @@ const SpotChart = ({ data }) => {
     );
   }
 
-  // Limit to top 5 spots if there are many
-  const chartData = data.slice(0, 5);
+  // Limit to top 8 spots if there are many
+  const chartData = data.slice(0, 8);
 
   return (
     <div className="chart-container">
