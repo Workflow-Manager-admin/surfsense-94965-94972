@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { 
   LineChart, 
   Line, 
@@ -17,13 +17,37 @@ import {
   TOOLTIP_STYLE,
   CHART_CONTAINER_STYLE,
   CHART_MARGINS,
-  formatMoodLabel
+  formatMoodLabel,
+  getTickInterval,
+  shouldRotateLabels
 } from '../../utils/chartUtils';
 
 /**
  * Enhanced chart showing mood trends over time with improved readability and styling
  */
 const MoodChart = ({ data }) => {
+  const containerRef = useRef(null);
+  const [containerWidth, setContainerWidth] = useState(0);
+
+  // Monitor container size changes
+  useEffect(() => {
+    const updateDimensions = () => {
+      if (containerRef.current) {
+        setContainerWidth(containerRef.current.clientWidth);
+      }
+    };
+    
+    // Initial measurement
+    updateDimensions();
+    
+    // Set up resize listener
+    window.addEventListener('resize', updateDimensions);
+    
+    return () => {
+      window.removeEventListener('resize', updateDimensions);
+    };
+  }, []);
+
   // If there's no data
   if (!data || data.length === 0) {
     return (
@@ -35,6 +59,7 @@ const MoodChart = ({ data }) => {
           justifyContent: 'center', 
           alignItems: 'center'
         }}
+        ref={containerRef}
       >
         <p className="glow-text" style={{ fontSize: FONT_SIZES.medium }}>
           No mood data available
@@ -44,10 +69,18 @@ const MoodChart = ({ data }) => {
   }
 
   // Format dates for display with improved clarity
+  // Use different format based on container width
+  const dateFormat = containerWidth < 400 ? 'M/d' : 'MMM d';
   const formattedData = data.map(item => ({
     ...item,
-    formattedDate: format(parseISO(item.date), 'MMM d')
+    formattedDate: format(parseISO(item.date), dateFormat)
   }));
+
+  // Determine tick interval (skip some ticks if many data points)
+  const tickInterval = getTickInterval(formattedData.length, containerWidth);
+  
+  // Determine if x-axis labels should be rotated
+  const rotateLabels = shouldRotateLabels(formattedData.length, containerWidth);
 
   // Enhanced tooltip formatter for mood data
   const customTooltipFormatter = (value) => {
@@ -59,17 +92,43 @@ const MoodChart = ({ data }) => {
     const moodEmojis = ['😞', '😐', '🙂', '😊', '🤩'];
     const emoji = moodEmojis[payload.value - 1] || '';
     
+    // Adjust emoji display based on container width
+    const showEmoji = containerWidth < 350 ? false : true;
+    const fontSize = FONT_SIZES.getResponsive(FONT_SIZES.medium, containerWidth);
+    
     return (
       <g transform={`translate(${x},${y})`}>
         <text 
-          x={-10} 
+          x={containerWidth < 350 ? -5 : -10} 
           y={0} 
           dy={4} 
-          fontSize={FONT_SIZES.medium} 
+          fontSize={fontSize} 
           textAnchor="end" 
           fill="var(--text-color)"
         >
-          {`${payload.value} ${emoji}`}
+          {showEmoji ? `${payload.value} ${emoji}` : `${payload.value}`}
+        </text>
+      </g>
+    );
+  };
+  
+  // Custom X axis tick with optional rotation
+  const customXAxisTick = ({ x, y, payload }) => {
+    if (!rotateLabels) return null; // Use default if not rotating
+    
+    return (
+      <g transform={`translate(${x},${y})`}>
+        <text 
+          x={0} 
+          y={0} 
+          dy={5} 
+          dx={-5}
+          textAnchor="end"
+          transform="rotate(-30)"
+          fill="var(--text-color)"
+          fontSize={FONT_SIZES.getResponsive(FONT_SIZES.small, containerWidth)}
+        >
+          {payload.value}
         </text>
       </g>
     );
@@ -77,6 +136,18 @@ const MoodChart = ({ data }) => {
 
   // Calculate average mood for reference line
   const averageMood = formattedData.reduce((sum, item) => sum + item.mood, 0) / formattedData.length;
+  
+  // Calculate responsive margins based on container size
+  const margins = CHART_MARGINS.getResponsive(
+    CHART_MARGINS.medium,
+    containerWidth,
+    formattedData.length
+  );
+  
+  // If labels are rotated, increase bottom margin
+  if (rotateLabels) {
+    margins.bottom += 10;
+  }
 
   return (
     <div className="chart-container glass-panel" style={CHART_CONTAINER_STYLE.glass}>
