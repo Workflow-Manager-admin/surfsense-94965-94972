@@ -150,10 +150,14 @@ const MoodChart = ({ data }) => {
   }
 
   return (
-    <div className="chart-container glass-panel" style={CHART_CONTAINER_STYLE.glass}>
+    <div 
+      className="chart-container glass-panel" 
+      style={CHART_CONTAINER_STYLE.glass}
+      ref={containerRef}
+    >
       <h3 className="chart-title glow-text" style={{ 
-        fontSize: FONT_SIZES.large, 
-        marginBottom: '16px',
+        fontSize: FONT_SIZES.getResponsive(FONT_SIZES.large, containerWidth), 
+        marginBottom: containerWidth < 400 ? '10px' : '16px',
         fontWeight: '600',
         textAlign: 'center'
       }}>
@@ -163,7 +167,7 @@ const MoodChart = ({ data }) => {
       <ResponsiveContainer width="100%" height="85%">
         <LineChart
           data={formattedData}
-          margin={CHART_MARGINS.medium}
+          margin={margins}
         >
           <defs>
             <linearGradient id="moodGradient" x1="0" y1="0" x2="0" y2="1">
@@ -188,15 +192,20 @@ const MoodChart = ({ data }) => {
           <XAxis 
             dataKey="formattedDate" 
             stroke="var(--text-color)" 
-            tick={{ fill: 'var(--text-color)', fontSize: FONT_SIZES.small }}
-            tickMargin={10}
+            tick={rotateLabels ? customXAxisTick : { 
+              fill: 'var(--text-color)', 
+              fontSize: FONT_SIZES.getResponsive(FONT_SIZES.small, containerWidth) 
+            }}
+            height={rotateLabels ? 50 : undefined}
+            tickMargin={rotateLabels ? 15 : 10}
+            interval={tickInterval}
             axisLine={{ stroke: 'var(--text-secondary)' }}
             label={{ 
               value: 'Date', 
               position: 'insideBottomRight', 
-              offset: -5, 
+              offset: rotateLabels ? -2 : -5, 
               fill: 'var(--text-color)',
-              fontSize: FONT_SIZES.small
+              fontSize: FONT_SIZES.getResponsive(FONT_SIZES.small, containerWidth)
             }}
           />
           
@@ -205,15 +214,15 @@ const MoodChart = ({ data }) => {
             ticks={[1, 2, 3, 4, 5]} 
             stroke="var(--text-color)" 
             tick={customYAxisTick}
-            tickMargin={10}
+            tickMargin={containerWidth < 350 ? 5 : 10}
             axisLine={{ stroke: 'var(--text-secondary)' }}
             label={{ 
               value: 'Mood Rating', 
               angle: -90, 
               position: 'insideLeft',
               fill: 'var(--text-color)',
-              fontSize: FONT_SIZES.small,
-              dx: -10
+              fontSize: FONT_SIZES.getResponsive(FONT_SIZES.small, containerWidth),
+              dx: containerWidth < 400 ? -5 : -10
             }}
           />
           
@@ -226,10 +235,13 @@ const MoodChart = ({ data }) => {
           
           <Legend 
             verticalAlign="top" 
-            align="right"
+            align={containerWidth < 400 ? "center" : "right"}
             iconType="circle"
             formatter={() => (
-              <span style={{ color: 'var(--text-color)', fontSize: FONT_SIZES.small }}>
+              <span style={{ 
+                color: 'var(--text-color)', 
+                fontSize: FONT_SIZES.getResponsive(FONT_SIZES.small, containerWidth) 
+              }}>
                 Your Mood
               </span>
             )}
@@ -243,8 +255,8 @@ const MoodChart = ({ data }) => {
             label={{ 
               value: 'Avg', 
               fill: '#FFF8E1', 
-              fontSize: FONT_SIZES.small,
-              position: 'right'
+              fontSize: FONT_SIZES.getResponsive(FONT_SIZES.small, containerWidth),
+              position: containerWidth < 400 ? "insideTopRight" : "right"
             }}
           />
 
@@ -252,15 +264,15 @@ const MoodChart = ({ data }) => {
             type="monotone" 
             dataKey="mood" 
             stroke="url(#moodGradient)" 
-            strokeWidth={3} 
+            strokeWidth={containerWidth < 350 ? 2 : 3}
             dot={{ 
               fill: 'var(--neon-blue)', 
-              r: 6, 
+              r: containerWidth < 350 ? 4 : 6, 
               strokeWidth: 2, 
               stroke: 'var(--white)' 
             }}
             activeDot={{ 
-              r: 8, 
+              r: containerWidth < 350 ? 6 : 8, 
               fill: 'var(--neon-teal)', 
               stroke: 'var(--white)', 
               strokeWidth: 2,
