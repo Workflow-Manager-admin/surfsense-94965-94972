@@ -437,17 +437,19 @@ export const SurfProvider = ({ children }) => {
   // Load sessions from localStorage on initial load
   useEffect(() => {
     try {
+      // Always initialize with sample data first for demonstration purposes
+      setSessions(sampleSessions);
+      
       if (typeof window !== 'undefined') {
         const storedSessions = window.localStorage.getItem('surfSessions');
+        // Only use stored sessions if they exist AND they're not empty array
         if (storedSessions) {
-          setSessions(JSON.parse(storedSessions));
-        } else {
-          // Use sample data if no sessions found in localStorage
-          setSessions(sampleSessions);
+          const parsedSessions = JSON.parse(storedSessions);
+          // Make sure we don't override with an empty array
+          if (parsedSessions && parsedSessions.length > 0) {
+            setSessions(parsedSessions);
+          }
         }
-      } else {
-        // Use sample data if window/localStorage not available
-        setSessions(sampleSessions);
       }
     } catch (error) {
       console.error('Error loading sessions:', error);
