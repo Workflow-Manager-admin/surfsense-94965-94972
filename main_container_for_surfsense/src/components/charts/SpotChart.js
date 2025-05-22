@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { 
   BarChart, 
   Bar, 
@@ -17,13 +17,39 @@ import {
   CHART_CONTAINER_STYLE,
   CHART_MARGINS,
   truncateText,
-  calculateBarSize
+  calculateBarSize,
+  shouldRotateLabels,
+  getLabelRotation,
+  getTickInterval,
+  shouldShowLabels
 } from '../../utils/chartUtils';
 
 /**
  * Enhanced chart showing most visited surf spots with improved visuals and readability
  */
 const SpotChart = ({ data }) => {
+  const containerRef = useRef(null);
+  const [containerWidth, setContainerWidth] = useState(0);
+
+  // Monitor container size changes
+  useEffect(() => {
+    const updateDimensions = () => {
+      if (containerRef.current) {
+        setContainerWidth(containerRef.current.clientWidth);
+      }
+    };
+    
+    // Initial measurement
+    updateDimensions();
+    
+    // Set up resize listener
+    window.addEventListener('resize', updateDimensions);
+    
+    return () => {
+      window.removeEventListener('resize', updateDimensions);
+    };
+  }, []);
+
   // If there's no data or only a few items
   if (!data || data.length === 0) {
     return (
@@ -35,6 +61,7 @@ const SpotChart = ({ data }) => {
           justifyContent: 'center', 
           alignItems: 'center'
         }}
+        ref={containerRef}
       >
         <p style={{ color: 'var(--dark-blue)', fontSize: FONT_SIZES.medium }}>
           No spot data available
@@ -43,27 +70,50 @@ const SpotChart = ({ data }) => {
     );
   }
 
-  // Limit to top 8 spots if there are many, and format the data
-  const chartData = data.slice(0, 8).map(item => ({
+  // Determine how many spots to show based on container width
+  const spotLimit = containerWidth < 350 ? 4 : 
+                   containerWidth < 500 ? 6 : 8;
+
+  // Limit spots and format the data
+  const chartData = data.slice(0, spotLimit).map(item => ({
     ...item,
-    // Add shortened name for display on axis 
-    displayName: truncateText(item.name, 10)
+    // Add shortened name for display on axis with dynamic truncation
+    displayName: truncateText(item.name, 
+                  containerWidth < 350 ? 6 :
+                  containerWidth < 500 ? 8 : 10, 
+                  containerWidth)
   }));
 
-  // Calculate dynamic bar size based on number of items
-  const barSize = calculateBarSize(chartData.length);
+  // Calculate dynamic bar size based on number of items and container width
+  const barSize = calculateBarSize(chartData.length, containerWidth);
 
-  // Custom X axis tick to handle long names
+  // Determine if labels should be rotated
+  const rotateLabels = shouldRotateLabels(chartData.length, containerWidth);
+  
+  // Calculate optimal rotation angle
+  const rotationAngle = getLabelRotation(
+    chartData.length > 0 ? chartData[0].name.length : 10,
+    containerWidth
+  );
+
+  // Determine tick interval (skip some ticks if many data points)
+  const tickInterval = getTickInterval(chartData.length, containerWidth);
+
+  // Custom X axis tick with rotation support
   const CustomXAxisTick = ({ x, y, payload }) => {
+    const labelFontSize = FONT_SIZES.getResponsive(FONT_SIZES.small, containerWidth);
+    
     return (
       <g transform={`translate(${x},${y})`}>
         <text 
           x={0} 
           y={0} 
-          dy={16} 
-          textAnchor="middle" 
+          dy={rotateLabels ? 5 : 16} 
+          dx={rotateLabels ? -5 : 0}
+          textAnchor={rotateLabels ? "end" : "middle"}
+          transform={rotateLabels ? `rotate(${rotationAngle})` : undefined}
           fill="#01579B"
-          fontSize={FONT_SIZES.small}
+          fontSize={labelFontSize}
           fontWeight="500"
         >
           {payload.value}
@@ -79,6 +129,21 @@ const SpotChart = ({ data }) => {
       `Location: ${props.payload.name}`
     ];
   };
+
+  // Calculate margins based on rotation and data length
+  const margins = CHART_MARGINS.getResponsive(
+    CHART_MARGINS.large,
+    containerWidth,
+    chartData.length
+  );
+  
+  // If labels are rotated, increase bottom margin
+  if (rotateLabels) {
+    margins.bottom += 15;
+  }
+
+  // Should we show data value labels on bars?
+  const showDataLabels = shouldShowLabels(chartData.length, containerWidth, barSize);
 
   return (
     <div className="chart-container glass-panel" style={CHART_CONTAINER_STYLE.default}>
