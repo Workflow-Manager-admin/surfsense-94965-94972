@@ -1,9 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { boardTypes } from '../data/surfContext';
-import { ReactComponent as WaveIcon } from '../assets/icons/wave.svg';
-import { ReactComponent as SurfboardIcon } from '../assets/icons/surfboard.svg';
-import { ReactComponent as SunIcon } from '../assets/icons/sun.svg';
-import { ReactComponent as TideIcon } from '../assets/icons/tide.svg';
 
 /**
  * Form component for adding/editing surf sessions with futuristic styling
@@ -91,7 +87,7 @@ const SessionForm = ({ initialData, onSubmit, formType = 'add' }) => {
       
       <div className="form-group">
         <label className="form-label flex items-center">
-          <SunIcon stroke="var(--neon-blue)" style={{ width: '20px', marginRight: '8px' }} />
+          <span style={{ fontSize: '20px', marginRight: '8px' }}>☀️</span>
           Date
         </label>
         <input
@@ -106,7 +102,7 @@ const SessionForm = ({ initialData, onSubmit, formType = 'add' }) => {
       
       <div className="form-group">
         <label className="form-label flex items-center">
-          <WaveIcon stroke="var(--neon-blue)" style={{ width: '20px', marginRight: '8px' }} />
+          <span style={{ fontSize: '20px', marginRight: '8px' }}>🌊</span>
           Surf Spot
         </label>
         <input
@@ -122,7 +118,7 @@ const SessionForm = ({ initialData, onSubmit, formType = 'add' }) => {
       
       <div className="form-group">
         <label className="form-label flex items-center">
-          <SurfboardIcon stroke="var(--neon-blue)" style={{ width: '20px', marginRight: '8px' }} />
+          <span style={{ fontSize: '20px', marginRight: '8px' }}>🏄‍♂️</span>
           Board Type
         </label>
         <select
@@ -200,7 +196,7 @@ const SessionForm = ({ initialData, onSubmit, formType = 'add' }) => {
       <div className="grid grid-cols-1 grid-cols-2-md" style={{ gap: '15px' }}>
         <div className="form-group">
           <label className="form-label flex items-center">
-            <WaveIcon stroke="var(--neon-blue)" style={{ width: '18px', marginRight: '8px' }} />
+            <span style={{ fontSize: '18px', marginRight: '8px' }}>🌊</span>
             Swell Height (ft)
           </label>
           <input
@@ -248,7 +244,7 @@ const SessionForm = ({ initialData, onSubmit, formType = 'add' }) => {
         
         <div className="form-group">
           <label className="form-label flex items-center">
-            <TideIcon stroke="var(--neon-blue)" style={{ width: '18px', marginRight: '8px' }} />
+            <span style={{ fontSize: '18px', marginRight: '8px' }}>🌡️</span>
             Tide
           </label>
           <select
