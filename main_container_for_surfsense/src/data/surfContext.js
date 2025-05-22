@@ -15,7 +15,7 @@ const sampleSessions = [
       swellHeight: 3.5,
       swellDirection: 'S',
       wind: 'Offshore',
-      tide: 'Mid Rising',
+      tide: 'Mid',
     },
     notes: 'Perfect morning glass! Dawn patrol paid off with empty lineup and consistent sets.'
   },
@@ -30,7 +30,7 @@ const sampleSessions = [
       swellHeight: 4,
       swellDirection: 'SW',
       wind: 'Cross-shore',
-      tide: 'Low Rising',
+      tide: 'Low',
     },
     notes: 'South swell picking up, caught some decent rights off the pier. Crowded but manageable.'
   },
@@ -45,7 +45,7 @@ const sampleSessions = [
       swellHeight: 4.5,
       swellDirection: 'NW',
       wind: 'Offshore',
-      tide: 'Mid Falling',
+      tide: 'Mid',
     },
     notes: 'Fish was the perfect choice for today. Long rides and great speed down the line.'
   },
@@ -107,7 +107,7 @@ const sampleSessions = [
       swellHeight: 2.5,
       swellDirection: 'SW',
       wind: 'Calm',
-      tide: 'Mid Rising',
+      tide: 'Mid',
     },
     notes: 'Small but fun. Great for practicing noseriding and trimming.'
   },
@@ -169,7 +169,7 @@ const sampleSessions = [
       swellHeight: 3.5,
       swellDirection: 'NW',
       wind: 'Offshore',
-      tide: 'Low Rising',
+      tide: 'Low',
     },
     notes: 'Mini mal was the perfect call today. Fun chest-high waves with good shape.'
   },
@@ -184,7 +184,7 @@ const sampleSessions = [
       swellHeight: 4,
       swellDirection: 'W',
       wind: 'Cross-shore',
-      tide: 'Mid Falling',
+      tide: 'Mid',
     },
     notes: 'Inconsistent sets but the waves that came through were decent quality.'
   },
@@ -295,7 +295,7 @@ const sampleSessions = [
       swellHeight: 6,
       swellDirection: 'NW',
       wind: 'Offshore',
-      tide: 'Mid Rising',
+      tide: 'Mid',
     },
     notes: 'Big winter NW swell hitting. Powerful waves but managed to get some good drops and turns.'
   },
@@ -357,7 +357,7 @@ const sampleSessions = [
       swellHeight: 3,
       swellDirection: 'W',
       wind: 'Offshore',
-      tide: 'Low Rising',
+      tide: 'Low',
     },
     notes: 'Love this spot with a fish board. Fast, fun waves and good energy in the lineup.'
   },
