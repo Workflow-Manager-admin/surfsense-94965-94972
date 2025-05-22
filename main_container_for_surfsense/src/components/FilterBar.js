@@ -103,7 +103,7 @@ const FilterBar = () => {
         left: '0',
         right: '0',
         height: '40px',
-        background: 'url(./assets/images/wave-bg.svg)',
+        background: 'url("../assets/images/wave-bg.svg")',
         backgroundSize: 'cover',
         opacity: '0.1',
         zIndex: '-1'

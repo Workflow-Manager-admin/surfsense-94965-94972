@@ -102,7 +102,7 @@ const MoodChart = ({ data }) => {
         left: '0',
         right: '0',
         height: '60px',
-        background: 'url(./assets/images/wave-bg.svg)',
+        background: 'url("../../assets/images/wave-bg.svg")',
         backgroundSize: 'cover',
         opacity: '0.05',
         zIndex: '-1'
