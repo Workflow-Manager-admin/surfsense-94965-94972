@@ -13,6 +13,7 @@ import {
   FONT_SIZES,
   TOOLTIP_STYLE,
   CHART_CONTAINER_STYLE,
+  CHART_MARGINS,
   truncateText
 } from '../../utils/chartUtils';
 
