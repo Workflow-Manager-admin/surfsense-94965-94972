@@ -434,6 +434,32 @@ export const SurfProvider = ({ children }) => {
     dateTo: ''
   });
 
+  // Clear potentially problematic localStorage on mount - one-time cleanup
+  useEffect(() => {
+    try {
+      if (typeof window !== 'undefined') {
+        const storedSessions = window.localStorage.getItem('surfSessions');
+        if (storedSessions) {
+          // Check if stored data is valid
+          try {
+            const parsedSessions = JSON.parse(storedSessions);
+            if (!Array.isArray(parsedSessions) || parsedSessions.length === 0) {
+              // If the stored data is empty or invalid, remove it
+              console.log('Removing invalid localStorage data');
+              window.localStorage.removeItem('surfSessions');
+            }
+          } catch (parseError) {
+            // If the stored data is not valid JSON, remove it
+            console.log('Removing corrupted localStorage data');
+            window.localStorage.removeItem('surfSessions');
+          }
+        }
+      }
+    } catch (error) {
+      console.error('Error cleaning localStorage:', error);
+    }
+  }, []);
+
   // Load sessions from localStorage on initial load
   useEffect(() => {
     try {
