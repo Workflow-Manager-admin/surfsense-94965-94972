@@ -131,9 +131,13 @@ const BoardChart = ({ data }) => {
   };
 
   return (
-    <div className="chart-container glass-panel" style={CHART_CONTAINER_STYLE.default}>
+    <div 
+      className="chart-container glass-panel" 
+      style={CHART_CONTAINER_STYLE.default}
+      ref={containerRef}
+    >
       <h3 className="chart-title" style={{ 
-        fontSize: FONT_SIZES.large, 
+        fontSize: FONT_SIZES.getResponsive(FONT_SIZES.large, containerWidth), 
         color: 'var(--dark-blue)',
         marginBottom: '16px',
         fontWeight: '600',
@@ -143,21 +147,26 @@ const BoardChart = ({ data }) => {
       </h3>
       
       <ResponsiveContainer width="100%" height="85%">
-        <PieChart margin={{ top: 10, right: 10, bottom: 10, left: 10 }}>
+        <PieChart 
+          margin={CHART_MARGINS.getResponsive(
+            { top: 20, right: 20, bottom: 20, left: 20 },
+            containerWidth
+          )}
+        >
           <Pie
-            data={data}
+            data={processedData}
             cx="50%"
             cy="45%"
             labelLine={false}
-            outerRadius={90} // Increased radius for better visibility
-            innerRadius={30} // Added inner radius for donut-style chart
+            outerRadius={chartSize.outerRadius}
+            innerRadius={chartSize.innerRadius}
             fill="#8884d8"
             dataKey="percentage"
-            nameKey="name"
+            nameKey="displayName"
             label={renderCustomizedLabel}
-            paddingAngle={2} // Added padding between segments
+            paddingAngle={containerWidth < 350 ? 1 : 2}
           >
-            {data.map((entry, index) => (
+            {processedData.map((entry, index) => (
               <Cell 
                 key={`cell-${index}`} 
                 fill={CHART_COLORS.pie[index % CHART_COLORS.pie.length]} 
@@ -169,7 +178,10 @@ const BoardChart = ({ data }) => {
               value="Board Types"
               position="center"
               fill="var(--dark-blue)"
-              style={{ fontSize: FONT_SIZES.medium, fontWeight: 'bold' }}
+              style={{ 
+                fontSize: FONT_SIZES.getResponsive(FONT_SIZES.medium, containerWidth),
+                fontWeight: 'bold' 
+              }}
             />
           </Pie>
           <Tooltip 
@@ -180,15 +192,22 @@ const BoardChart = ({ data }) => {
           <Legend 
             verticalAlign="bottom" 
             align="center" 
-            layout="horizontal"
-            iconSize={14}
+            layout={containerWidth < 400 ? "vertical" : "horizontal"}
+            iconSize={containerWidth < 350 ? 10 : 14}
             iconType="circle"
             formatter={(value) => (
-              <span style={{ color: 'var(--dark-blue)', fontSize: FONT_SIZES.small, fontWeight: 500 }}>
-                {value}
+              <span style={{ 
+                color: 'var(--dark-blue)', 
+                fontSize: FONT_SIZES.getResponsive(FONT_SIZES.small, containerWidth),
+                fontWeight: 500 
+              }}>
+                {truncateText(value, containerWidth < 400 ? 10 : 20, containerWidth)}
               </span>
             )}
-            wrapperStyle={{ paddingTop: '15px' }}
+            wrapperStyle={{ 
+              paddingTop: containerWidth < 400 ? '5px' : '15px',
+              maxWidth: '100%' 
+            }}
           />
         </PieChart>
       </ResponsiveContainer>
