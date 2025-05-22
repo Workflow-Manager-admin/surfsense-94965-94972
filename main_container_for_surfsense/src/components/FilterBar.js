@@ -1,8 +1,5 @@
 import React from 'react';
 import { useSurfData, boardTypes } from '../data/surfContext';
-import { ReactComponent as FilterIcon } from '../assets/icons/filter.svg';
-import { ReactComponent as WaveIcon } from '../assets/icons/wave.svg';
-import { ReactComponent as SurfboardIcon } from '../assets/icons/surfboard.svg';
 
 /**
  * Component for filtering surf sessions with futuristic styling

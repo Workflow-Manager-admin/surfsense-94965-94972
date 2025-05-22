@@ -14,12 +14,11 @@ const ReminderBanner = () => {
       overflow: 'hidden'
     }}>
       <div className="flex items-center">
-        <WaveIcon stroke="white" style={{ 
-          width: '24px', 
-          height: '24px',
+        <span style={{ 
+          fontSize: '24px',
           marginRight: '10px',
           filter: 'drop-shadow(0 0 5px var(--neon-blue))'
-        }} />
+        }}>🌊</span>
         <span className="glow-text">Surf today? Don't forget to log your session!</span>
       </div>
       <div style={{
