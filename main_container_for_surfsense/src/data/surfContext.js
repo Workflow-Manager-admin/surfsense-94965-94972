@@ -462,7 +462,10 @@ export const SurfProvider = ({ children }) => {
   useEffect(() => {
     try {
       if (typeof window !== 'undefined') {
-        window.localStorage.setItem('surfSessions', JSON.stringify(sessions));
+        // Only save to localStorage if we have sessions (don't overwrite with empty array)
+        if (sessions.length > 0) {
+          window.localStorage.setItem('surfSessions', JSON.stringify(sessions));
+        }
       }
     } catch (error) {
       console.error('Error saving sessions:', error);
