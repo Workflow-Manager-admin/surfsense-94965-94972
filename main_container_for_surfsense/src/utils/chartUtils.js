@@ -133,14 +133,9 @@ export const formatMoodLabel = (value) => {
   }
 };
 
-// Text truncation helper for long labels
-export const truncateText = (text, maxLength = 12) => {
-  if (!text || text.length <= maxLength) return text;
-  return `${text.substring(0, maxLength)}...`;
-};
-
 // Calculate dynamic font size based on available space and text length
 export const dynamicFontSize = (containerWidth, textLength) => {
+=======
   if (!containerWidth) containerWidth = window.innerWidth < 768 ? 300 : 500;
   
   if (containerWidth < 200) return FONT_SIZES.xsmall;
