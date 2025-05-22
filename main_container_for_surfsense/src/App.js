@@ -1,8 +1,7 @@
 import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import './App.css';
-import { ReactComponent as WaveIcon } from './assets/icons/wave.svg';
-import { ReactComponent as SurfboardIcon } from './assets/icons/surfboard.svg';
+// SVG imports replaced with emoji icons
 
 // Import actual components
 import HomePage from './pages/HomePage';

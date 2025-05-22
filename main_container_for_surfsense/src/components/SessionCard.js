@@ -85,15 +85,13 @@ const SessionCard = ({ session }) => {
           {session.conditions ? (
             <>
               <span className="futuristic-tag">
-                <WaveIcon stroke="currentColor" style={{ width: '14px', marginRight: '4px' }} />
-                {session.conditions.swellHeight || 0}ft
+                🌊 {session.conditions.swellHeight || 0}ft
               </span>
               <span className="futuristic-tag">
-                {session.conditions.wind || 'Unknown'}
+                💨 {session.conditions.wind || 'Unknown'}
               </span>
               <span className="futuristic-tag">
-                <TideIcon stroke="currentColor" style={{ width: '14px', marginRight: '4px' }} />
-                {session.conditions.tide || 'Unknown'} Tide
+                🌡️ {session.conditions.tide || 'Unknown'} Tide
               </span>
             </>
           ) : (
