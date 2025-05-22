@@ -139,18 +139,90 @@ export const truncateText = (text, maxLength = 12) => {
   return `${text.substring(0, maxLength)}...`;
 };
 
-// Calculate dynamic font size based on available space
+// Calculate dynamic font size based on available space and text length
 export const dynamicFontSize = (containerWidth, textLength) => {
+  if (!containerWidth) containerWidth = window.innerWidth < 768 ? 300 : 500;
+  
   if (containerWidth < 200) return FONT_SIZES.xsmall;
-  if (textLength > 20) return FONT_SIZES.xsmall;
-  if (textLength > 10) return FONT_SIZES.small;
-  return FONT_SIZES.medium;
+  if (textLength > 20) return FONT_SIZES.getResponsive(FONT_SIZES.xsmall, containerWidth);
+  if (textLength > 10) return FONT_SIZES.getResponsive(FONT_SIZES.small, containerWidth);
+  return FONT_SIZES.getResponsive(FONT_SIZES.medium, containerWidth);
 };
 
-// Dynamic bar width calculation based on number of items
-export const calculateBarSize = (dataLength) => {
-  if (dataLength <= 3) return 60;
-  if (dataLength <= 5) return 40;
-  if (dataLength <= 8) return 30;
-  return 20;
+// Dynamic bar width calculation based on number of items and container width
+export const calculateBarSize = (dataLength, containerWidth) => {
+  const baseSize = dataLength <= 3 ? 60 : 
+                  dataLength <= 5 ? 40 : 
+                  dataLength <= 8 ? 30 : 20;
+                  
+  // Further adjust based on container width
+  if (containerWidth && containerWidth < 400) {
+    return Math.max(15, baseSize * 0.7);
+  }
+  
+  return baseSize;
+};
+
+// Determine if labels should be rotated based on data density and container width
+export const shouldRotateLabels = (dataLength, containerWidth) => {
+  if (!containerWidth) containerWidth = window.innerWidth;
+  
+  // For small screens or many data points
+  if (containerWidth < 500) return true;
+  if (dataLength > 4 && containerWidth < 768) return true;
+  if (dataLength > 6) return true;
+  
+  return false;
+};
+
+// Determines optimal rotation angle based on text length and available width
+export const getLabelRotation = (textLength, containerWidth) => {
+  if (!containerWidth) containerWidth = window.innerWidth;
+  
+  if (textLength > 10 && containerWidth < 400) return -45;
+  if (textLength > 8) return -30;
+  if (containerWidth < 500 && textLength > 5) return -30;
+  if (containerWidth < 768 && textLength > 7) return -25;
+  
+  return 0;
+};
+
+// Determines if data points should be skipped to prevent overcrowding
+export const getTickInterval = (dataLength, containerWidth) => {
+  if (!containerWidth) containerWidth = window.innerWidth;
+  
+  if (dataLength > 10 && containerWidth < 500) return Math.ceil(dataLength / 4);
+  if (dataLength > 8 && containerWidth < 768) return Math.ceil(dataLength / 5);
+  if (dataLength > 12) return Math.ceil(dataLength / 6);
+  
+  return 0; // Show all ticks
+};
+
+// Enhanced text truncation that adjusts based on container size
+export const truncateText = (text, maxLength = 12, containerWidth) => {
+  if (!text) return '';
+  
+  // Adjust max length based on container size
+  if (containerWidth) {
+    if (containerWidth < 350) maxLength = 6;
+    else if (containerWidth < 500) maxLength = 8;
+    else if (containerWidth < 768) maxLength = 10;
+  }
+  
+  if (text.length <= maxLength) return text;
+  return `${text.substring(0, maxLength)}...`;
+};
+
+// Determines whether to show labels based on data density and container width
+export const shouldShowLabels = (dataLength, containerWidth, elementWidth) => {
+  if (!containerWidth) containerWidth = window.innerWidth;
+  
+  // If labels would be very cramped, don't show them
+  const approximateWidth = containerWidth / dataLength;
+  
+  // If each label would have less than 40px (or element width + 10px padding), hide them
+  const minWidth = elementWidth ? (elementWidth + 10) : 40;
+  if (approximateWidth < minWidth) return false;
+  
+  return true;
 };
