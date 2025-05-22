@@ -524,25 +524,104 @@ input[type="range"] {
   -webkit-appearance: none;
   width: 100%;
   height: 8px;
-  border-radius: 4px;
-  background: #e0e0e0;
+  border-radius: 20px;
+  background: rgba(0, 229, 255, 0.2);
   outline: none;
+  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+  margin: 15px 0;
 }
 
 input[type="range"]::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
-  width: 20px;
-  height: 20px;
+  width: 24px;
+  height: 24px;
   border-radius: 50%;
-  background: var(--teal);
+  background: var(--neon-blue);
   cursor: pointer;
+  border: 2px solid rgba(255, 255, 255, 0.8);
+  box-shadow: 0 0 8px var(--neon-blue);
 }
 
 input[type="range"]::-moz-range-thumb {
-  width: 20px;
-  height: 20px;
+  width: 24px;
+  height: 24px;
   border-radius: 50%;
-  background: var(--teal);
+  background: var(--neon-blue);
   cursor: pointer;
+  border: 2px solid rgba(255, 255, 255, 0.8);
+  box-shadow: 0 0 8px var(--neon-blue);
+}
+
+/* Futuristic UI components */
+.neon-border {
+  border: 1px solid var(--neon-blue);
+  box-shadow: 0 0 10px rgba(0, 229, 255, 0.5);
+}
+
+.glow-text {
+  text-shadow: 0 0 10px rgba(0, 229, 255, 0.7);
+}
+
+.glass-panel {
+  background-color: rgba(13, 71, 161, 0.3);
+  backdrop-filter: blur(10px);
+  border-radius: 12px;
+  border: 1px solid rgba(0, 229, 255, 0.2);
+  padding: 20px;
+}
+
+.surf-icon {
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  margin-right: 8px;
+}
+
+.surf-icon svg {
+  width: 100%;
+  height: 100%;
+  fill: currentColor;
+}
+
+.futuristic-tag {
+  background: linear-gradient(90deg, var(--neon-blue), var(--neon-teal));
+  color: var(--white);
+  border-radius: 20px;
+  padding: 4px 12px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  margin-right: 8px;
+  margin-bottom: 8px;
+  box-shadow: 0 2px 8px rgba(0, 229, 255, 0.3);
+}
+
+.wave-divider {
+  height: 50px;
+  width: 100%;
+  background-image: url('./assets/images/wave-bg.svg');
+  background-size: cover;
+  background-position: center;
+  margin: 20px 0;
+}
+
+.beach-card-bg {
+  position: relative;
+}
+
+.beach-card-bg::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: url('./assets/images/surf-silhouette.svg');
+  background-size: cover;
+  background-position: center;
+  opacity: 0.08;
+  z-index: -1;
+  border-radius: inherit;
 }
