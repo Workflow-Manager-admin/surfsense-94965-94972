@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ReactComponent as WaveIcon } from '../assets/icons/wave.svg';
 
 /**
  * Banner that displays a reminder to log today's session with futuristic styling

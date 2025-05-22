@@ -45,16 +45,16 @@ function App() {
                 <div className="flex gap-4">
                   <Link to="/stats" style={{ textDecoration: 'none' }}>
                     <button className="btn btn-secondary">
-                      <span className="surf-icon" style={{ width: '16px', height: '16px' }}>
-                        <WaveIcon stroke="currentColor" />
+                      <span className="surf-icon" style={{ marginRight: '4px' }}>
+                        📊
                       </span>
                       Stats
                     </button>
                   </Link>
                   <Link to="/new" style={{ textDecoration: 'none' }}>
                     <button className="btn">
-                      <span className="surf-icon" style={{ width: '16px', height: '16px' }}>
-                        <SurfboardIcon stroke="currentColor" />
+                      <span className="surf-icon" style={{ marginRight: '4px' }}>
+                        🏄
                       </span>
                       New Session
                     </button>
