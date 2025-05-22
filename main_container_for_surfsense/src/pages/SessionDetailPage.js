@@ -35,17 +35,24 @@ const SessionDetailPage = () => {
     }
   };
   
-  // Format date
-  const formattedDate = format(parseISO(session.date), 'MMMM d, yyyy');
+  // Format date safely
+  const formattedDate = session.date 
+    ? format(parseISO(session.date), 'MMMM d, yyyy') 
+    : 'Unknown date';
   
   // Array of mood emojis from worst to best
   const moodEmojis = ['😞', '😐', '🙂', '😊', '🤩'];
   const moodDescriptions = ['Poor', 'Fair', 'Good', 'Great', 'Epic'];
   
+  // Get mood index safely
+  const moodIndex = session.mood && session.mood >= 1 && session.mood <= 5 
+    ? session.mood - 1 
+    : 2; // Default to middle mood if invalid
+  
   return (
     <div className="page">
       <div className="page-header">
-        <h1 className="title">{session.spot}</h1>
+        <h1 className="title">{session.spot || 'Unnamed Session'}</h1>
         <div className="flex gap-2">
           <Link to={`/edit/${id}`}>
             <button className="btn btn-secondary">Edit</button>
@@ -62,12 +69,12 @@ const SessionDetailPage = () => {
           </div>
           
           <div className="stat-card">
-            <div className="stat-number">{session.waveCount}</div>
+            <div className="stat-number">{session.waveCount || 0}</div>
             <div className="stat-label">Waves Caught</div>
           </div>
           
           <div className="stat-card">
-            <div className="stat-number">{session.board}</div>
+            <div className="stat-number">{session.board || 'Unknown'}</div>
             <div className="stat-label">Board Used</div>
           </div>
         </div>
@@ -82,32 +89,40 @@ const SessionDetailPage = () => {
           borderRadius: '8px' 
         }}>
           <div className="mood-emoji" style={{ fontSize: '3rem' }}>
-            {moodEmojis[session.mood - 1]}
+            {moodEmojis[moodIndex]}
           </div>
           <div>
             <div style={{ fontWeight: '500' }}>
-              {moodDescriptions[session.mood - 1]}
+              {moodDescriptions[moodIndex]}
             </div>
             <div style={{ color: 'var(--text-secondary)' }}>
-              {session.mood}/5 rating
+              {session.mood || 3}/5 rating
             </div>
           </div>
         </div>
         
         <h3 className="card-title">Conditions</h3>
         <div className="grid grid-cols-2 grid-cols-4-md" style={{ marginBottom: '24px' }}>
-          <div>
-            <div><strong>Swell:</strong></div> 
-            <div>{session.conditions.swellHeight} ft {session.conditions.swellDirection}</div>
-          </div>
-          <div>
-            <div><strong>Wind:</strong></div>
-            <div>{session.conditions.wind}</div>
-          </div>
-          <div>
-            <div><strong>Tide:</strong></div>
-            <div>{session.conditions.tide}</div>
-          </div>
+          {session.conditions ? (
+            <>
+              <div>
+                <div><strong>Swell:</strong></div> 
+                <div>
+                  {session.conditions.swellHeight || 0} ft {session.conditions.swellDirection || 'N/A'}
+                </div>
+              </div>
+              <div>
+                <div><strong>Wind:</strong></div>
+                <div>{session.conditions.wind || 'Unknown'}</div>
+              </div>
+              <div>
+                <div><strong>Tide:</strong></div>
+                <div>{session.conditions.tide || 'Unknown'}</div>
+              </div>
+            </>
+          ) : (
+            <div>No conditions data available</div>
+          )}
         </div>
         
         {session.notes && (
