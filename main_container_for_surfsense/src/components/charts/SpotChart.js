@@ -146,11 +146,15 @@ const SpotChart = ({ data }) => {
   const showDataLabels = shouldShowLabels(chartData.length, containerWidth, barSize);
 
   return (
-    <div className="chart-container glass-panel" style={CHART_CONTAINER_STYLE.default}>
+    <div 
+      className="chart-container glass-panel" 
+      style={CHART_CONTAINER_STYLE.default}
+      ref={containerRef}
+    >
       <h3 className="chart-title" style={{ 
-        fontSize: FONT_SIZES.large, 
+        fontSize: FONT_SIZES.getResponsive(FONT_SIZES.large, containerWidth), 
         color: 'var(--dark-blue)',
-        marginBottom: '16px',
+        marginBottom: containerWidth < 400 ? '10px' : '16px',
         fontWeight: '600',
         textAlign: 'center'
       }}>
@@ -160,8 +164,8 @@ const SpotChart = ({ data }) => {
       <ResponsiveContainer width="100%" height="85%">
         <BarChart
           data={chartData}
-          margin={CHART_MARGINS.large}
-          barCategoryGap="15%"
+          margin={margins}
+          barCategoryGap={containerWidth < 500 ? "10%" : "15%"}
         >
           <defs>
             <linearGradient id="barGradient" x1="0" y1="0" x2="0" y2="1">
@@ -179,15 +183,16 @@ const SpotChart = ({ data }) => {
           <XAxis 
             dataKey="displayName" 
             tick={CustomXAxisTick}
-            interval={0}
-            tickMargin={10}
+            interval={tickInterval}
+            height={rotateLabels ? 60 : 40}
+            tickMargin={rotateLabels ? 15 : 10}
             axisLine={{ stroke: '#01579B' }}
             label={{ 
               value: 'Surf Location', 
               position: 'insideBottom', 
-              offset: -5,
+              offset: rotateLabels ? -2 : -5,
               fill: '#01579B',
-              fontSize: FONT_SIZES.small,
+              fontSize: FONT_SIZES.getResponsive(FONT_SIZES.small, containerWidth),
               fontWeight: 500
             }}
           />
@@ -196,15 +201,18 @@ const SpotChart = ({ data }) => {
             allowDecimals={false} 
             axisLine={{ stroke: '#01579B' }}
             tickLine={{ stroke: '#01579B' }}
-            tick={{ fontSize: FONT_SIZES.small, fill: '#01579B' }}
+            tick={{ 
+              fontSize: FONT_SIZES.getResponsive(FONT_SIZES.small, containerWidth), 
+              fill: '#01579B' 
+            }}
             tickMargin={10}
             label={{ 
               value: 'Number of Sessions', 
               angle: -90, 
               position: 'insideLeft',
               fill: '#01579B',
-              fontSize: FONT_SIZES.small,
-              dx: -15
+              fontSize: FONT_SIZES.getResponsive(FONT_SIZES.small, containerWidth),
+              dx: containerWidth < 400 ? -10 : -15
             }}
           />
           
@@ -217,10 +225,16 @@ const SpotChart = ({ data }) => {
           <Legend
             iconType="circle"
             formatter={() => (
-              <span style={{ color: 'var(--dark-blue)', fontSize: FONT_SIZES.small }}>
+              <span style={{ 
+                color: 'var(--dark-blue)', 
+                fontSize: FONT_SIZES.getResponsive(FONT_SIZES.small, containerWidth) 
+              }}>
                 Sessions
               </span>
             )}
+            wrapperStyle={{
+              paddingTop: containerWidth < 400 ? '5px' : '10px'
+            }}
           />
           
           <Bar 
@@ -230,13 +244,15 @@ const SpotChart = ({ data }) => {
             radius={[4, 4, 0, 0]}
             animationDuration={1500}
           >
-            <LabelList 
-              dataKey="count" 
-              position="top" 
-              fill="#01579B" 
-              fontSize={FONT_SIZES.small}
-              formatter={(value) => value > 0 ? value : ''}
-            />
+            {showDataLabels && (
+              <LabelList 
+                dataKey="count" 
+                position="top" 
+                fill="#01579B" 
+                fontSize={FONT_SIZES.getResponsive(FONT_SIZES.small, containerWidth)}
+                formatter={(value) => value > 0 ? value : ''}
+              />
+            )}
           </Bar>
         </BarChart>
       </ResponsiveContainer>
