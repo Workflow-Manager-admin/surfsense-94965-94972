@@ -55,7 +55,7 @@ const FilterBar = () => {
         
         <div className="form-group">
           <label className="form-label flex items-center">
-            <SurfboardIcon stroke="var(--neon-blue)" style={{ width: '18px', marginRight: '8px' }} />
+            <span style={{ fontSize: '18px', marginRight: '8px' }}>🏄</span>
             Board
           </label>
           <select
