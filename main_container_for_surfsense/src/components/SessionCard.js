@@ -1,9 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { format, parseISO } from 'date-fns';
-import { ReactComponent as WaveIcon } from '../assets/icons/wave.svg';
-import { ReactComponent as SurfboardIcon } from '../assets/icons/surfboard.svg';
-import { ReactComponent as TideIcon } from '../assets/icons/tide.svg';
 
 /**
  * Renders a card for a single surf session with futuristic UI
@@ -22,7 +19,7 @@ const SessionCard = ({ session }) => {
     <div className="card beach-card-bg">
       <div className="card-header flex justify-between">
         <div className="flex items-center">
-          <div className="surf-icon">
+          <div className="surf-icon" style={{ fontSize: '22px', marginRight: '8px' }}>
             🌊
           </div>
           <h3 className="card-title glow-text">{session.spot || 'Unnamed Spot'}</h3>
@@ -44,7 +41,7 @@ const SessionCard = ({ session }) => {
       <div className="card-subtitle" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
         {session.date ? format(parseISO(session.date), 'MMMM d, yyyy') : 'No date'} 
         <span className="flex items-center">
-          <div className="surf-icon" style={{ width: '16px', height: '16px', marginLeft: '8px' }}>
+          <div style={{ fontSize: '16px', marginLeft: '8px', marginRight: '4px' }}>
             🏄‍♂️
           </div>
           {session.board || 'Unknown board'}
