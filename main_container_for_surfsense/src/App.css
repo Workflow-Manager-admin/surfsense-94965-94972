@@ -29,15 +29,14 @@ body {
   margin: 0;
   font-family: 'Inter', 'Roboto', 'Helvetica', 'Arial', sans-serif;
   background-color: var(--background);
-  background-image: url('./assets/images/ocean-pattern.svg');
-  background-size: cover;
-  background-attachment: fixed;
   color: var(--text-color);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   position: relative;
   overflow-x: hidden;
 }
+
+/* We'll add the background pattern with JavaScript to ensure proper loading */
 
 body::before {
   content: '';
