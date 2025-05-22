@@ -579,7 +579,10 @@ export const SurfProvider = ({ children }) => {
    * Get statistics for the dashboard
    */
   const getStats = () => {
+    console.log('Getting stats, sessions length:', sessions.length);
+    
     if (sessions.length === 0) {
+      console.log('No sessions available for stats');
       return {
         totalSessions: 0,
         totalWaves: 0,
