@@ -436,18 +436,27 @@ export const SurfProvider = ({ children }) => {
 
   // Load sessions from localStorage on initial load
   useEffect(() => {
-    const storedSessions = localStorage.getItem('surfSessions');
-    if (storedSessions) {
-      setSessions(JSON.parse(storedSessions));
+    // Check if window is defined (to avoid SSR issues)
+    if (typeof window !== 'undefined') {
+      const storedSessions = window.localStorage.getItem('surfSessions');
+      if (storedSessions) {
+        setSessions(JSON.parse(storedSessions));
+      } else {
+        // Use sample data if no sessions found in localStorage
+        setSessions(sampleSessions);
+      }
     } else {
-      // Use sample data if no sessions found in localStorage
+      // Use sample data if window/localStorage not available
       setSessions(sampleSessions);
     }
   }, []);
 
   // Save sessions to localStorage whenever sessions change
   useEffect(() => {
-    localStorage.setItem('surfSessions', JSON.stringify(sessions));
+    // Check if window is defined (to avoid SSR issues)
+    if (typeof window !== 'undefined') {
+      window.localStorage.setItem('surfSessions', JSON.stringify(sessions));
+    }
   }, [sessions]);
 
   /**
