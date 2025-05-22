@@ -45,7 +45,7 @@ const SessionCard = ({ session }) => {
         {session.date ? format(parseISO(session.date), 'MMMM d, yyyy') : 'No date'} 
         <span className="flex items-center">
           <div className="surf-icon" style={{ width: '16px', height: '16px', marginLeft: '8px' }}>
-            <SurfboardIcon stroke="var(--aqua)" />
+            🏄‍♂️
           </div>
           {session.board || 'Unknown board'}
         </span>
