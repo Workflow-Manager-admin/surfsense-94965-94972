@@ -1,17 +1,46 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import './App.css';
-import { SurfProvider } from './data/surfContext';
-import HomePage from './pages/HomePage';
-import NewSessionPage from './pages/NewSessionPage';
-import SessionDetailPage from './pages/SessionDetailPage';
-import StatsPage from './pages/StatsPage';
+
+// Simplified components for debugging purposes
+const HomePage = () => (
+  <div className="page">
+    <h1 className="title">My Surf Sessions</h1>
+    <p>Home page content will go here.</p>
+  </div>
+);
+
+const NewSessionPage = () => (
+  <div className="page">
+    <h1 className="title">Log New Session</h1>
+    <p>Form will go here.</p>
+  </div>
+);
+
+const SessionDetailPage = () => (
+  <div className="page">
+    <h1 className="title">Session Details</h1>
+    <p>Details will go here.</p>
+  </div>
+);
+
+const StatsPage = () => (
+  <div className="page">
+    <h1 className="title">Statistics</h1>
+    <p>Stats will go here.</p>
+  </div>
+);
+
+// Simplified provider
+const SurfProvider = ({ children }) => {
+  return <>{children}</>;
+};
 
 function App() {
   return (
     <SurfProvider>
       <Router>
-        <div className="app wave-bg">
+        <div className="app">
           <nav className="navbar">
             <div className="container">
               <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%', alignItems: 'center' }}>
