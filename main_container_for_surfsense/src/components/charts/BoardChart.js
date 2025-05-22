@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { 
   PieChart, 
   Pie, 
@@ -12,13 +12,36 @@ import {
   CHART_COLORS,
   FONT_SIZES,
   TOOLTIP_STYLE,
-  CHART_CONTAINER_STYLE
+  CHART_CONTAINER_STYLE,
+  truncateText
 } from '../../utils/chartUtils';
 
 /**
  * Chart showing board usage percentages with enhanced visual appeal and readability
  */
 const BoardChart = ({ data }) => {
+  const containerRef = useRef(null);
+  const [containerWidth, setContainerWidth] = useState(0);
+
+  // Monitor container size changes
+  useEffect(() => {
+    const updateDimensions = () => {
+      if (containerRef.current) {
+        setContainerWidth(containerRef.current.clientWidth);
+      }
+    };
+    
+    // Initial measurement
+    updateDimensions();
+    
+    // Set up resize listener
+    window.addEventListener('resize', updateDimensions);
+    
+    return () => {
+      window.removeEventListener('resize', updateDimensions);
+    };
+  }, []);
+
   // If there's no data
   if (!data || data.length === 0) {
     return (
@@ -30,6 +53,7 @@ const BoardChart = ({ data }) => {
           justifyContent: 'center', 
           alignItems: 'center'
         }}
+        ref={containerRef}
       >
         <p style={{ color: 'var(--dark-blue)', fontSize: FONT_SIZES.medium }}>
           No board data available
@@ -38,16 +62,41 @@ const BoardChart = ({ data }) => {
     );
   }
 
+  // Process data to ensure labels don't overlap
+  const processedData = data.map(item => ({
+    ...item,
+    // Use shortened name for very small screens
+    displayName: containerWidth < 400 ? truncateText(item.name, 8, containerWidth) : item.name
+  })).sort((a, b) => b.percentage - a.percentage); // Sort by percentage to improve layout
+
   // Custom renderer for pie chart labels to prevent overlapping
   const renderCustomizedLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, percent, index, name }) => {
     const RADIAN = Math.PI / 180;
-    // Position label farther from the pie to avoid overlapping
-    const radius = outerRadius * 1.15;
+    
+    // Dynamically adjust label position based on container size
+    const radius = containerWidth < 350 ? outerRadius * 1.05 : 
+                  containerWidth < 500 ? outerRadius * 1.1 : outerRadius * 1.15;
+    
+    // Calculate position
     const x = cx + radius * Math.cos(-midAngle * RADIAN);
     const y = cy + radius * Math.sin(-midAngle * RADIAN);
     
-    // Only show label for segments with significant percentage
-    if (percent < 0.05) return null;
+    // Skip small segments based on container size
+    const minPercent = containerWidth < 400 ? 0.08 : 
+                      containerWidth < 600 ? 0.06 : 0.05;
+    
+    if (percent < minPercent) return null;
+    
+    // Adjust font size based on container width
+    const fontSize = containerWidth < 400 ? 
+                    FONT_SIZES.xsmall : 
+                    containerWidth < 600 ? 
+                    FONT_SIZES.small : FONT_SIZES.small;
+    
+    // For smaller screens, show only percentage
+    const labelText = containerWidth < 350 ? 
+                    `${(percent * 100).toFixed(0)}%` : 
+                    `${processedData[index].displayName} (${(percent * 100).toFixed(0)}%)`;
     
     return (
       <text 
@@ -56,20 +105,29 @@ const BoardChart = ({ data }) => {
         fill="#01579B"
         textAnchor={x > cx ? 'start' : 'end'} 
         dominantBaseline="central"
-        fontSize={FONT_SIZES.small}
+        fontSize={fontSize}
         fontWeight="500"
       >
-        {`${name} (${(percent * 100).toFixed(0)}%)`}
+        {labelText}
       </text>
     );
   };
 
-  // Enhanced tooltip formatter
+  // Enhanced tooltip formatter to show full info (especially for segments without labels)
   const tooltipFormatter = (value, name, props) => {
+    const boardName = props.payload.name;
     return [
       `${value}%`,
-      `Board: ${props.payload.name}`
+      `Board: ${boardName}`
     ];
+  };
+
+  // Calculate optimal chart dimensions based on container size
+  const chartSize = {
+    outerRadius: containerWidth < 350 ? 70 : 
+                containerWidth < 500 ? 80 : 90,
+    innerRadius: containerWidth < 350 ? 25 :
+                containerWidth < 500 ? 28 : 30
   };
 
   return (
