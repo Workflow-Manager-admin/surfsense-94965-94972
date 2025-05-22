@@ -40,7 +40,7 @@ const FilterBar = () => {
       <div className="grid grid-cols-1 grid-cols-3-md" style={{ gap: '15px' }}>
         <div className="form-group">
           <label className="form-label flex items-center">
-            <WaveIcon stroke="var(--neon-blue)" style={{ width: '18px', marginRight: '8px' }} />
+            <span style={{ fontSize: '18px', marginRight: '8px' }}>🌊</span>
             Spot
           </label>
           <input
