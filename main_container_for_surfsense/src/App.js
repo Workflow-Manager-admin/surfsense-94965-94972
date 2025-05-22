@@ -1,40 +1,15 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import './App.css';
+import { ReactComponent as WaveIcon } from './assets/icons/wave.svg';
+import { ReactComponent as SurfboardIcon } from './assets/icons/surfboard.svg';
 
-// Simplified components for debugging purposes
-const HomePage = () => (
-  <div className="page">
-    <h1 className="title">My Surf Sessions</h1>
-    <p>Home page content will go here.</p>
-  </div>
-);
-
-const NewSessionPage = () => (
-  <div className="page">
-    <h1 className="title">Log New Session</h1>
-    <p>Form will go here.</p>
-  </div>
-);
-
-const SessionDetailPage = () => (
-  <div className="page">
-    <h1 className="title">Session Details</h1>
-    <p>Details will go here.</p>
-  </div>
-);
-
-const StatsPage = () => (
-  <div className="page">
-    <h1 className="title">Statistics</h1>
-    <p>Stats will go here.</p>
-  </div>
-);
-
-// Simplified provider
-const SurfProvider = ({ children }) => {
-  return <>{children}</>;
-};
+// Import actual components
+import HomePage from './pages/HomePage';
+import NewSessionPage from './pages/NewSessionPage';
+import SessionDetailPage from './pages/SessionDetailPage';
+import StatsPage from './pages/StatsPage';
+import { SurfProvider } from './data/surfContext';
 
 function App() {
   return (
@@ -46,15 +21,30 @@ function App() {
               <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%', alignItems: 'center' }}>
                 <Link to="/" style={{ textDecoration: 'none' }}>
                   <div className="logo">
-                    <span className="logo-symbol">🌊</span> SurfSync
+                    <WaveIcon stroke="var(--neon-blue)" style={{ 
+                      width: '24px', 
+                      height: '24px',
+                      filter: 'drop-shadow(0 0 5px var(--neon-blue))'
+                    }} /> 
+                    <span className="glow-text">SurfSync</span>
                   </div>
                 </Link>
                 <div className="flex gap-4">
                   <Link to="/stats" style={{ textDecoration: 'none' }}>
-                    <button className="btn btn-secondary">Stats</button>
+                    <button className="btn btn-secondary">
+                      <span className="surf-icon" style={{ width: '16px', height: '16px' }}>
+                        <WaveIcon stroke="currentColor" />
+                      </span>
+                      Stats
+                    </button>
                   </Link>
                   <Link to="/new" style={{ textDecoration: 'none' }}>
-                    <button className="btn">+ New Session</button>
+                    <button className="btn">
+                      <span className="surf-icon" style={{ width: '16px', height: '16px' }}>
+                        <SurfboardIcon stroke="currentColor" />
+                      </span>
+                      New Session
+                    </button>
                   </Link>
                 </div>
               </div>
