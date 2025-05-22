@@ -12,7 +12,7 @@ const sampleSessions = [
     waveCount: 22,
     mood: 5,
     conditions: {
-      swellHeight: 3.5,
+      swellHeight: 3,
       swellDirection: 'S',
       wind: 'Offshore',
       tide: 'Mid',
@@ -32,7 +32,7 @@ const sampleSessions = [
       wind: 'Cross-shore',
       tide: 'Low',
     },
-    notes: 'South swell picking up, caught some decent rights off the pier. Crowded but manageable.'
+    notes: 'South swell picking up, caught some decent rights off the pier.'
   },
   {
     id: '3',
@@ -42,12 +42,12 @@ const sampleSessions = [
     waveCount: 28,
     mood: 5,
     conditions: {
-      swellHeight: 4.5,
+      swellHeight: 4,
       swellDirection: 'NW',
       wind: 'Offshore',
       tide: 'Mid',
     },
-    notes: 'Fish was the perfect choice for today. Long rides and great speed down the line.'
+    notes: 'Fish was the perfect choice for today.'
   },
   
   // May 2023 sessions
@@ -64,7 +64,7 @@ const sampleSessions = [
       wind: 'Offshore',
       tide: 'Mid',
     },
-    notes: 'Epic session! Best waves of the month. Got some good turns in and even landed a small air.'
+    notes: 'Epic session! Best waves of the month.'
   },
   {
     id: '5',
@@ -79,12 +79,12 @@ const sampleSessions = [
       wind: 'Onshore',
       tide: 'High',
     },
-    notes: 'Conditions turned during session. Started clean but onshore winds picked up.'
+    notes: 'Conditions turned during session.'
   },
   {
     id: '6',
     date: '2023-05-15',
-    spot: 'Venice Breakwater',
+    spot: 'Venice Beach',
     board: 'Foamie',
     waveCount: 19,
     mood: 2,
@@ -94,7 +94,7 @@ const sampleSessions = [
       wind: 'Onshore',
       tide: 'High',
     },
-    notes: 'Way too crowded. Beginners dropping in constantly. At least caught a few waves.'
+    notes: 'Way too crowded today.'
   },
   {
     id: '7',
@@ -104,12 +104,12 @@ const sampleSessions = [
     waveCount: 18,
     mood: 4,
     conditions: {
-      swellHeight: 2.5,
+      swellHeight: 2,
       swellDirection: 'SW',
       wind: 'Calm',
       tide: 'Mid',
     },
-    notes: 'Small but fun. Great for practicing noseriding and trimming.'
+    notes: 'Small but fun waves today.'
   },
   {
     id: '8',
@@ -124,7 +124,7 @@ const sampleSessions = [
       wind: 'Offshore',
       tide: 'Low',
     },
-    notes: 'Morning glass with just a few people out. Fish board worked great in these peaky conditions.'
+    notes: 'Morning glass with just a few people out.'
   },
   
   // April 2023 sessions
@@ -141,7 +141,7 @@ const sampleSessions = [
       wind: 'Calm',
       tide: 'Mid',
     },
-    notes: 'Perfect longboard day at Old Man\'s. Caught some really long rides and met some cool locals.'
+    notes: 'Perfect longboard day at San O.'
   },
   {
     id: '10',
@@ -156,7 +156,7 @@ const sampleSessions = [
       wind: 'Onshore',
       tide: 'High',
     },
-    notes: 'Choppy and disorganized. Should have checked the forecast more carefully.'
+    notes: 'Choppy and disorganized conditions.'
   },
   {
     id: '11',
@@ -166,12 +166,12 @@ const sampleSessions = [
     waveCount: 22,
     mood: 4,
     conditions: {
-      swellHeight: 3.5,
+      swellHeight: 3,
       swellDirection: 'NW',
       wind: 'Offshore',
       tide: 'Low',
     },
-    notes: 'Mini mal was the perfect call today. Fun chest-high waves with good shape.'
+    notes: 'Mini mal was the perfect call today.'
   },
   {
     id: '12',
@@ -186,7 +186,7 @@ const sampleSessions = [
       wind: 'Cross-shore',
       tide: 'Mid',
     },
-    notes: 'Inconsistent sets but the waves that came through were decent quality.'
+    notes: 'Inconsistent sets today.'
   },
   
   // March 2023 sessions
@@ -198,12 +198,12 @@ const sampleSessions = [
     waveCount: 31,
     mood: 5,
     conditions: {
-      swellHeight: 5.5,
+      swellHeight: 5,
       swellDirection: 'S',
       wind: 'Offshore',
       tide: 'Low',
     },
-    notes: 'One of the best days I\'ve had at Lowers! Consistent overhead sets and light crowd.'
+    notes: 'One of the best days at Lowers!'
   },
   {
     id: '14',
@@ -218,7 +218,7 @@ const sampleSessions = [
       wind: 'Offshore',
       tide: 'Mid',
     },
-    notes: 'Big day at Blacks. Intimidating paddle out but rewarding once lined up. Good practice on the gun.'
+    notes: 'Big day at Blacks. Challenging but fun.'
   },
   {
     id: '15',
@@ -233,7 +233,7 @@ const sampleSessions = [
       wind: 'Calm',
       tide: 'High',
     },
-    notes: 'Small but clean. Decent for practicing fundamentals on the log.'
+    notes: 'Small but clean waves.'
   },
   
   // February 2023 sessions
@@ -250,7 +250,7 @@ const sampleSessions = [
       wind: 'Offshore',
       tide: 'Low',
     },
-    notes: 'Classic Rincon day! Long right-hand walls that seemed to go forever.'
+    notes: 'Classic Rincon day!'
   },
   {
     id: '17',
@@ -265,7 +265,7 @@ const sampleSessions = [
       wind: 'Onshore',
       tide: 'Mid',
     },
-    notes: 'Cold, foggy and challenging. Powerful currents and closeouts. Good exercise at least.'
+    notes: 'Cold, foggy and challenging.'
   },
   {
     id: '18',
@@ -280,7 +280,7 @@ const sampleSessions = [
       wind: 'Cross-shore',
       tide: 'High',
     },
-    notes: 'Decent winter session. Funboard helped with the mushy waves.'
+    notes: 'Decent winter session.'
   },
   
   // January 2023 sessions
@@ -297,7 +297,7 @@ const sampleSessions = [
       wind: 'Offshore',
       tide: 'Mid',
     },
-    notes: 'Big winter NW swell hitting. Powerful waves but managed to get some good drops and turns.'
+    notes: 'Big winter NW swell hitting.'
   },
   {
     id: '20',
@@ -307,12 +307,12 @@ const sampleSessions = [
     waveCount: 10,
     mood: 1,
     conditions: {
-      swellHeight: 1.5,
+      swellHeight: 1,
       swellDirection: 'SW',
       wind: 'Onshore',
       tide: 'High',
     },
-    notes: 'Extremely flat and blown out. Should have checked the report before driving all the way here.'
+    notes: 'Extremely flat and blown out.'
   },
   {
     id: '21',
@@ -327,7 +327,7 @@ const sampleSessions = [
       wind: 'Offshore',
       tide: 'Mid',
     },
-    notes: 'Biggest day I\'ve ever surfed. Terrifying but exhilarating. Only caught 3 waves but they were the ride of my life.'
+    notes: 'Biggest day I\'ve ever surfed.'
   },
   
   // December 2022 sessions
@@ -344,7 +344,7 @@ const sampleSessions = [
       wind: 'Calm',
       tide: 'High',
     },
-    notes: 'Post-holiday SUP session. Relaxing way to burn off the Christmas dinner.'
+    notes: 'Post-holiday SUP session.'
   },
   {
     id: '23',
@@ -359,7 +359,7 @@ const sampleSessions = [
       wind: 'Offshore',
       tide: 'Low',
     },
-    notes: 'Love this spot with a fish board. Fast, fun waves and good energy in the lineup.'
+    notes: 'Love this spot with a fish board.'
   },
   {
     id: '24',
@@ -374,7 +374,7 @@ const sampleSessions = [
       wind: 'Offshore',
       tide: 'Mid',
     },
-    notes: 'Perfect December day. Offshore winds all session and consistent sets.'
+    notes: 'Perfect December day.'
   },
   
   // November 2022 sessions
@@ -386,12 +386,12 @@ const sampleSessions = [
     waveCount: 19,
     mood: 3,
     conditions: {
-      swellHeight: 2.5,
+      swellHeight: 2,
       swellDirection: 'W',
       wind: 'Calm',
       tide: 'Mid',
     },
-    notes: 'Fun autumn session. Water starting to get cooler but still comfortable in a 3/2.'
+    notes: 'Fun autumn session.'
   }
 ];
 
@@ -436,26 +436,34 @@ export const SurfProvider = ({ children }) => {
 
   // Load sessions from localStorage on initial load
   useEffect(() => {
-    // Check if window is defined (to avoid SSR issues)
-    if (typeof window !== 'undefined') {
-      const storedSessions = window.localStorage.getItem('surfSessions');
-      if (storedSessions) {
-        setSessions(JSON.parse(storedSessions));
+    try {
+      if (typeof window !== 'undefined') {
+        const storedSessions = window.localStorage.getItem('surfSessions');
+        if (storedSessions) {
+          setSessions(JSON.parse(storedSessions));
+        } else {
+          // Use sample data if no sessions found in localStorage
+          setSessions(sampleSessions);
+        }
       } else {
-        // Use sample data if no sessions found in localStorage
+        // Use sample data if window/localStorage not available
         setSessions(sampleSessions);
       }
-    } else {
-      // Use sample data if window/localStorage not available
+    } catch (error) {
+      console.error('Error loading sessions:', error);
+      // If there's any error, fall back to sample data
       setSessions(sampleSessions);
     }
   }, []);
 
   // Save sessions to localStorage whenever sessions change
   useEffect(() => {
-    // Check if window is defined (to avoid SSR issues)
-    if (typeof window !== 'undefined') {
-      window.localStorage.setItem('surfSessions', JSON.stringify(sessions));
+    try {
+      if (typeof window !== 'undefined') {
+        window.localStorage.setItem('surfSessions', JSON.stringify(sessions));
+      }
+    } catch (error) {
+      console.error('Error saving sessions:', error);
     }
   }, [sessions]);
 
@@ -604,7 +612,7 @@ export const SurfProvider = ({ children }) => {
       }))
       .sort((a, b) => b.percentage - a.percentage);
       
-    // Calculate mood trend over time - showing last 15 sessions for a more comprehensive trend
+    // Calculate mood trend over time - showing last 15 sessions for more comprehensive trend
     const last15Sessions = [...sessions]
       .sort((a, b) => new Date(a.date) - new Date(b.date))
       .slice(-15);
